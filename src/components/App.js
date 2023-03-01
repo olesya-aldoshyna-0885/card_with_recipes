@@ -1,19 +1,16 @@
-import RecipesList from "./RecipesList";
-import recipes from "../recipes.json"
+import RecipesList from "./RecipeList/RecipesList";
+import recipes from "../recipes.json";
+import { GlobalStyle } from "./GlobalStyle";
+import { Layout } from "./Layout";
+
 
 export const App = () => {
   return (
-    <div>
+    <Layout>
       <RecipesList items={recipes} />
-     {/* style={{
-       height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      fontSize: 40,
-      color: '#010101'
-      }} */}
+      <GlobalStyle />
 
-    </div>
+
+    </Layout>
   );
 };
