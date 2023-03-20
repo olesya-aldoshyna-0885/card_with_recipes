@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { RecipeList } from './RecipeList/RecipeList';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout/Layout';
+import { RecipeForm } from './RecipeForm/RecipeForm'
 import initialRecipes from '../recipes.json';
 
 
@@ -10,6 +11,14 @@ export class App extends Component {
     recipes: initialRecipes,
     // selectedImage: null,
   };
+
+   addRecipe = newRecipe => {
+    this.setState(prevState => {
+      return {
+        recipes: [...prevState.recipes, newRecipe],
+      };
+    });
+  }
 
   deleteRecipe = recipeId => {
     this.setState(prevState => {
@@ -34,6 +43,8 @@ export class App extends Component {
             <img src={this.state.selectedImage} alt="" width="320"/>
         </div>
   )} */}
+  
+        <RecipeForm onSave={this.addRecipe} />
         <RecipeList
           items={this.state.recipes}
           onDelete={this.deleteRecipe}
