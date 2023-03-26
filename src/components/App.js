@@ -8,9 +8,28 @@ import initialRecipes from '../recipes.json';
 
 export class App extends Component {
   state = {
-    recipes: initialRecipes,
+    recipes: [],
     // selectedImage: null,
   };
+
+  componentDidMount = () => {
+    const savedRecipes = localStorage.getItem('recipes');
+    // console.log(savedRecipes);
+    if (savedRecipes !== null) {
+      const parseRecipes = JSON.parse(savedRecipes);
+      this.setState({ recipes: parseRecipes });
+      return;
+    }
+    this.setState({recipes: initialRecipes})
+  }
+  
+
+  componentDidUpdate = (_, prevState) => {
+  if (prevState.recipes !== this.state.recipes) {
+    localStorage.setItem('recipes', JSON.stringify(this.state.recipes))
+  }
+}
+
 
    addRecipe = newRecipe => {
     this.setState(prevState => {
